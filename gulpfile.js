@@ -16,11 +16,9 @@ const paths = {
 	html: "./html/**/*.kit",
 	sass: "./src/sass/**/*.scss",
 	js: "./src/js/**/*.js",
-	img: "./src/img/*",
 	dist: "./dist",
 	sassDest: "./dist/css",
 	jsDest: "./dist/js",
-	imgDest: "./dist/img",
 };
 
 function sassCompiler(done) {
@@ -43,11 +41,6 @@ function javaScript(done) {
 		.pipe(rename({ suffix: ".min" }))
 		.pipe(sourcemaps.write())
 		.pipe(dest(paths.jsDest));
-	done();
-}
-
-function convertImages(done) {
-	src(paths.img).pipe(imagemin()).pipe(dest(paths.imgDest));
 	done();
 }
 
@@ -81,11 +74,6 @@ function watchForChanges(done) {
 	done();
 }
 
-const mainFunctions = parallel(
-	handleKits,
-	sassCompiler,
-	javaScript,
-	convertImages
-);
+const mainFunctions = parallel(handleKits, sassCompiler, javaScript);
 exports.cleanStuff = cleanStuff;
 exports.default = series(mainFunctions, startBrowserSync, watchForChanges);

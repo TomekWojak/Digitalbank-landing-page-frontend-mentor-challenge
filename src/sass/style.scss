@@ -1,0 +1,30 @@
+@use "./components" as *;
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+:root {
+	--very-dark-blue: hsl(233, 26%, 24%);
+	--green: hsl(136, 64%, 51%);
+	--cyan: hsl(192, 69%, 51%);
+	--pure-white: hsl(0, 100%, 100%);
+	--very-light-gray: hsl(0, 0%, 98%);
+	--light-gray: hsl(220, 16%, 96%);
+	--gray: hsl(233, 8%, 62%);
+}
+
+button {
+	display: block;
+	font-family: inherit;
+}
+body {
+	min-height: 100dvh;
+	font-family: "Public Sans", sans-serif;
+}
+.wrapper {
+	width: min(100%, 1200px);
+	margin-inline: auto;
+}
