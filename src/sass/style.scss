@@ -164,9 +164,77 @@ body {
 	}
 }
 
+.articles {
+	background-color: var(--very-light-gray);
+	&__content {
+		padding: var(--section-padding) var(--main-padding-inline);
+	}
+	&__container {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 3em;
+	}
+	&__img {
+		border-radius: 8px 8px 0 0;
+		overflow: hidden;
+	}
+	&__title {
+		text-align: center;
+		font-size: var(--second-title-size);
+		font-weight: 300;
+		color: var(--very-dark-blue);
+		margin-block-end: var(--text-margin-top);
+	}
+	&__link {
+		text-decoration: none;
+		color: #000;
+		overflow: hidden;
+	}
+	&__article {
+		height: 100%;
+	}
+	&__body {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		padding: 3em;
+		background-color: var(--pure-white);
+		box-shadow: 0 0 10px #2e2e2e15;
+		border-radius: 0 0 8px 8px;
+	}
+	&__author {
+		color: var(--gray);
+		font-size: clamp(1.1rem, 3vw, 1.2rem);
+	}
+	&__title-small {
+		margin: 1em 0;
+		font-size: clamp(1.5rem, 2.8vw, 1.75rem);
+		color: var(--very-dark-blue);
+		font-weight: 450;
+	}
+	&__text-small {
+		color: var(--gray);
+		font-size: var(--text-size);
+		font-weight: 300;
+		font-size: clamp(1.4rem, 2.8vw, 1.55rem);
+	}
+}
+
 @media (576px <= width) {
 	body {
 		--main-padding-inline: 4em;
+	}
+}
+@media (700px <= width) {
+	.articles {
+		&__container {
+			grid-template-columns: repeat(2, 1fr);
+			grid-auto-rows: 1fr;
+		}
+		&__img img {
+			height: 210px;
+			object-fit: cover;
+		}
 	}
 }
 @media (768px <= width) {
@@ -190,6 +258,22 @@ body {
 		}
 		&__text-small {
 			line-height: 150%;
+		}
+	}
+	.articles {
+		&__img img {
+			transition: transform 0.6s;
+		}
+		&__link:hover {
+			.articles__img img {
+				transform: scale(1.1);
+			}
+		}
+		&__title-small {
+			transition: color 0.3s;
+			&:hover {
+				color: #48e1a9;
+			}
 		}
 	}
 }
@@ -276,6 +360,14 @@ body {
 			margin: var(--text-margin-top) 0;
 		}
 	}
+	.articles {
+		&__title {
+			text-align: left;
+		}
+		&__container {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
 }
 @media (1200px <= width) {
 	body {
@@ -303,7 +395,9 @@ body {
 		&__content {
 			padding: 20em 0;
 		}
-
+		&__info {
+			padding: 0 var(--main-padding-inline);
+		}
 		&__img {
 			top: -21em;
 		}
