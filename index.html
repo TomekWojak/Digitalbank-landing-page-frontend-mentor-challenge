@@ -16,9 +16,24 @@
 
 <body>
   <nav class="nav">
-    <a href="/" class="nav__logo">
-      <img src="/dist/" alt="">
-    </a>
+    <div class="nav__content">
+      <a href="/" class="nav__logo">
+        <img width="154" height="22" src="/images/logo-dark.svg" alt="Digitalbank's logo">
+      </a>
+      <button class="nav__toggler" aria-expanded="false" aria-label="Show mobile navigation">
+        <span class="nav__bar nav__bar--top"></span>
+        <span class="nav__bar nav__bar--middle"></span>
+        <span class="nav__bar nav__bar--bottom"></span>
+      </button>
+
+      <ul class="nav__mobile" aria-label="Mobile navigation">
+        <li class="nav__mobile-li"><a href="/" class="nav__mobile-link">Home</a></li>
+        <li class="nav__mobile-li"><a href="/" class="nav__mobile-link">About</a></li>
+        <li class="nav__mobile-li"><a href="/" class="nav__mobile-link">Contact</a></li>
+        <li class="nav__mobile-li"><a href="/" class="nav__mobile-link">Blog</a></li>
+        <li class="nav__mobile-li"><a href="/" class="nav__mobile-link">Careers</a></li>
+      </ul>
+    </div>
   </nav>
   <!-- Home
   About
@@ -92,13 +107,13 @@
   Careers
   Support
   Privacy Policy
-
+  
   Request Invite
-
+  
   © Digitalbank. All Rights Reserved
-   -->
-
+  -->
   <!-- Challenge by Frontend Mentor - https://www.frontendmentor.io?ref=challenge" -->
+  <div class="overlay"></div>
 </body>
 
 </html>

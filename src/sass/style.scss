@@ -1,4 +1,5 @@
 @use "./components" as *;
+@use "./animations" as *;
 *,
 *::before,
 *::after {
@@ -14,11 +15,24 @@
 	--very-light-gray: hsl(0, 0%, 98%);
 	--light-gray: hsl(220, 16%, 96%);
 	--gray: hsl(233, 8%, 62%);
+	--main-padding-block: 1.5em;
+	--main-padding-inline: 2em;
+	--logo-width: 175px;
+	--nav-mobile-gap: 1em;
 }
 
 button {
 	display: block;
 	font-family: inherit;
+}
+html {
+	font-size: 62.5%;
+}
+img {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	font-style: italic;
 }
 body {
 	min-height: 100dvh;
@@ -27,4 +41,25 @@ body {
 .wrapper {
 	width: min(100%, 1200px);
 	margin-inline: auto;
+}
+.nav {
+	position: relative;
+	z-index: 1000;
+	background-color: var(--pure-white);
+	&__content {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: var(--main-padding-block) var(--main-padding-inline);
+	}
+	&__logo {
+		text-decoration: none;
+		display: block;
+
+		img {
+			width: var(--logo-width);
+			height: auto;
+		}
+	}
 }

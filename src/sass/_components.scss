@@ -1,0 +1,113 @@
+@use "./animations" as *;
+
+.overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	inset: 0;
+	background: linear-gradient(
+		to bottom,
+		rgba(0, 0, 0, 0.3) 50%,
+		rgba(255, 255, 255, 0.6)
+	);
+	z-index: 800;
+}
+.nav {
+	// BURGER BUTTON
+	&__toggler {
+		position: relative;
+		width: 40px;
+		height: 40px;
+		background: none;
+		border: none;
+		cursor: pointer;
+	}
+	&__bar {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 85%;
+		height: 3px;
+		background-color: var(--gray);
+
+		&--top {
+			top: 11px;
+		}
+		&--middle {
+			top: 19px;
+			transition: opacity 0.3s 0.2s cubic-bezier(0, 1, 0.8, 1);
+		}
+		&--bottom {
+			top: 27px;
+		}
+	}
+}
+
+.nav__toggler.active .nav__bar--top {
+	animation: topAnimation 0.3s 0.1s cubic-bezier(0, 1, 0.8, 1) forwards;
+}
+.nav__toggler.active .nav__bar--bottom {
+	animation: bottomAnimation 0.3s 0.1s cubic-bezier(0, 1, 0.8, 1) forwards;
+}
+.nav__toggler.active .nav__bar--middle {
+	opacity: 0;
+}
+.nav__toggler.unactive .nav__bar--top {
+	animation: topAnimationClose 0.3s 0.2s cubic-bezier(0, 1, 0.8, 1) both;
+}
+.nav__toggler.unactive .nav__bar--bottom {
+	animation: bottomAnimationClose 0.3s 0.2s cubic-bezier(0, 1, 0.8, 1) both;
+}
+// END OF BURGER BUTTON ^
+
+.nav {
+	&__mobile {
+		position: absolute;
+		top: calc(100% + var(--nav-mobile-gap));
+		inset-inline: var(--main-padding-inline);
+		list-style: none;
+		text-align: center;
+		background-color: var(--pure-white);
+		border-radius: 6px;
+		height: 0;
+		opacity: 0;
+		transition: height 0.3s 0.3s cubic-bezier(0, 1, 0.8, 1),
+			opacity 0.3s 0.3s cubic-bezier(0, 1, 0.8, 1);
+		overflow: hidden;
+
+		&.opened {
+			opacity: 1;
+		}
+	}
+	&__mobile-link {
+		display: block;
+		padding: 1.5em 1.5em 0;
+		color: var(--very-dark-blue);
+		font-weight: 400;
+		text-decoration: none;
+		font-size: 1.8rem;
+		transition: transform 0.3s;
+	}
+	&__mobile-li {
+		display: block;
+		transform: translateY(-100px);
+		&.active {
+			animation: fade-in 0.5s forwards;
+		}
+		&:nth-child(2) {
+			animation-delay: 0.05s;
+		}
+		&:nth-child(3) {
+			animation-delay: 0.1s;
+		}
+		&:nth-child(4) {
+			animation-delay: 0.15s;
+		}
+		&:nth-child(5) {
+			animation-delay: 0.2s;
+		}
+	}
+	&__mobile-li:last-child .nav__mobile-link {
+		padding-block-end: 1.5em;
+	}
+}

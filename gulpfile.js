@@ -5,7 +5,6 @@ const autoprefixer = require("gulp-autoprefixer");
 const rename = require("gulp-rename");
 const babel = require("gulp-babel");
 const uglify = require("gulp-uglify");
-const imagemin = require("gulp-imagemin");
 const sourcemaps = require("gulp-sourcemaps");
 const clean = require("gulp-clean");
 const kit = require("gulp-kit");
@@ -70,7 +69,6 @@ function watchForChanges(done) {
 		[paths.html, paths.sass, paths.js],
 		parallel(handleKits, sassCompiler, javaScript)
 	).on("change", reload);
-	watch(paths.img, convertImages).on("change", reload);
 	done();
 }
 
