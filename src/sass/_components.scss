@@ -1,17 +1,41 @@
 @use "./animations" as *;
 
 .overlay {
+	display: none;
+	opacity: 0;
 	position: fixed;
 	width: 100%;
 	height: 100%;
 	inset: 0;
 	background: linear-gradient(
 		to bottom,
-		rgba(0, 0, 0, 0.3) 50%,
-		rgba(255, 255, 255, 0.6)
+		rgba(0, 0, 0, 0.25) 60%,
+		rgba(255, 255, 255, 0.3)
 	);
 	z-index: 800;
+
+	&.active {
+		display: block;
+		animation: opacity 0.4s forwards;
+	}
 }
+.request-btn-box {
+	&--desktop-visible {
+		display: none;
+	}
+}
+.request-btn {
+	display: block;
+	width: fit-content;
+	padding: 0.9em 2em;
+	text-decoration: none;
+	background: linear-gradient(25deg, var(--cyan), var(--green));
+	color: var(--pure-white);
+	font-size: 1.6rem;
+	border-radius: 30px;
+	font-weight: 700;
+}
+
 .nav {
 	// BURGER BUTTON
 	&__toggler {
@@ -29,6 +53,7 @@
 		width: 85%;
 		height: 3px;
 		background-color: var(--gray);
+		pointer-events: none;
 
 		&--top {
 			top: 11px;
@@ -61,6 +86,9 @@
 // END OF BURGER BUTTON ^
 
 .nav {
+	&__desktop {
+		display: none;
+	}
 	&__mobile {
 		position: absolute;
 		top: calc(100% + var(--nav-mobile-gap));
@@ -107,7 +135,103 @@
 			animation-delay: 0.2s;
 		}
 	}
+	&__mobile-li:first-child .nav__mobile-link {
+		padding-block-start: 2em;
+	}
 	&__mobile-li:last-child .nav__mobile-link {
-		padding-block-end: 1.5em;
+		padding-block-end: 2em;
+	}
+}
+
+@media (768px <= width) {
+	.request-btn-box {
+		position: relative;
+		isolation: isolate;
+	}
+	.request-btn {
+		position: relative;
+		transition: opacity 0.3s;
+
+		&:hover {
+			opacity: 0.7;
+		}
+		&:hover::before {
+			opacity: 0.7;
+		}
+		&::before {
+			content: "";
+			position: absolute;
+			inset: -0.2em;
+			z-index: -1;
+			background: linear-gradient(25deg, var(--cyan), var(--green));
+			border-radius: inherit;
+			filter: blur(5px);
+			opacity: 0;
+			transition: opacity 0.3s;
+		}
+	}
+	.overlay {
+		display: none !important;
+	}
+	.nav {
+		&__mobile {
+			display: none;
+		}
+		&__toggler {
+			display: none;
+		}
+		&__desktop {
+			display: flex;
+			align-items: center;
+			list-style: none;
+		}
+		&__desktop-link {
+			position: relative;
+			display: block;
+			padding: 0.9em 1.2em;
+			text-decoration: none;
+			color: var(--gray);
+			font-weight: 500;
+			font-size: 1.45rem;
+			transition: color 0.3s;
+
+			&:hover,
+			&.active {
+				color: var(--very-dark-blue);
+			}
+			&::before {
+				content: "";
+				display: none;
+				position: absolute;
+				inset-inline: 0;
+				opacity: 0;
+				margin: 0 auto;
+				top: calc(100% + 0.76em);
+				width: 60px;
+				height: 4px;
+				transform: scale(0);
+				transform-origin: center;
+				background: linear-gradient(360deg, var(--cyan) 20%, var(--green) 50%);
+			}
+			&.active::before {
+				display: block;
+				animation: activeLink 0.3s forwards;
+			}
+		}
+	}
+}
+
+@media (900px <= width) {
+	.request-btn-box {
+		&--desktop-visible {
+			display: block;
+		}
+	}
+	.nav {
+		&__desktop-link {
+			&::before {
+				top: calc(100% + 0.94em);
+			}
+		}
 	}
 }
