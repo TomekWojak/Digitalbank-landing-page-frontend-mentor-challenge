@@ -63,6 +63,9 @@ document.addEventListener("DOMContentLoaded", function () {
 			}, mainTimeout);
 		}
 	};
+	const removeActive = () => {
+		allDesktopLinks.forEach((link) => link.classList.remove("active"));
+	};
 	allDesktopLinks.forEach((link) =>
 		link.addEventListener("click", (e) => {
 			e.preventDefault();
