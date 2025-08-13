@@ -43,6 +43,8 @@ img {
 	font-style: italic;
 }
 body {
+	display: flex;
+	flex-direction: column;
 	min-height: 100dvh;
 	font-family: "Public Sans", sans-serif;
 }
@@ -221,6 +223,7 @@ body {
 }
 
 .footer {
+	margin-block-start: auto;
 	background-color: var(--very-dark-blue);
 
 	&__content {
@@ -317,6 +320,9 @@ body {
 				transform: scale(1.1);
 			}
 		}
+		&__link:focus-visible {
+			outline: 2px solid #48e1a9;
+		}
 		&__title-small {
 			transition: color 0.3s;
 			&:hover {
@@ -328,13 +334,17 @@ body {
 		&__link {
 			transition: color 0.3s;
 
-			&:hover {
+			&:hover,
+			&:focus-visible {
 				color: #48e1a9;
+				outline: none;
 			}
 		}
 		&__social-link {
-			&:hover svg path {
+			&:hover svg path,
+			&:focus-visible svg path {
 				fill: #48e1a9;
+				outline: none;
 			}
 			svg path {
 				transition: fill 0.3s;

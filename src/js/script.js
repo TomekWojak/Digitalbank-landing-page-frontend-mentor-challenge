@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
 	const navToggler = document.querySelector(".nav__toggler");
 	const navMobile = document.querySelector(".nav__mobile");
-	const allMobileLi = document.querySelectorAll(".nav__mobile-li");
 	const overlay = document.querySelector(".overlay");
 	const allDesktopLinks = document.querySelectorAll(".nav__desktop-link");
+	let mainTimeout = 400;
 
 	const showOverlay = () => {
 		overlay.classList.add("active");
@@ -11,16 +11,22 @@ document.addEventListener("DOMContentLoaded", function () {
 	const hideOverlay = () => {
 		setTimeout(() => {
 			overlay.classList.remove("active");
-		}, 300);
+		}, mainTimeout);
 	};
+	let togglerOpened = false;
 	const handleNav = () => {
-		const isOpened = navToggler.getAttribute("aria-expanded");
+		const isOpened = navToggler.getAttribute("aria-expanded") === "true";
 
-		if (isOpened === "false") {
+		if (!isOpened) {
+			togglerOpened = true;
 			showNav();
 			togglerOn();
 			showOverlay();
+			setTimeout(() => {
+				togglerOpened = false;
+			}, mainTimeout);
 		} else {
+			if (togglerOpened) return;
 			showNav();
 			togglerOff();
 			hideOverlay();
@@ -33,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		navToggler.setAttribute("aria-label", "Show mobile navigation");
 		setTimeout(() => {
 			navToggler.classList.remove("unactive");
-		}, 400);
+		}, mainTimeout);
 	};
 	const togglerOn = () => {
 		navToggler.classList.add("active");
@@ -42,29 +48,20 @@ document.addEventListener("DOMContentLoaded", function () {
 	};
 
 	const showNav = () => {
-		const isOpened = navToggler.getAttribute("aria-expanded");
-
-		if (isOpened === "false") {
+		const isOpened = navToggler.getAttribute("aria-expanded") === "true";
+		if (!isOpened) {
+			navMobile.style.display = "block";
 			navMobile.style.height = navMobile.scrollHeight + "px";
 			navMobile.classList.add("opened");
-			allMobileLi.forEach((li) => {
-				li.classList.add("active");
-			});
 		} else {
 			requestAnimationFrame(() => {
 				navMobile.style.height = 0 + "px";
 			});
 			navMobile.classList.remove("opened");
-
-			const removeActive = () => {
-				allMobileLi.forEach((li) => li.classList.remove("active"));
-				navMobile.removeEventListener("transitionend", removeActive);
-			};
-			navMobile.addEventListener("transitionend", removeActive);
+			setTimeout(() => {
+				navMobile.style.display = "none";
+			}, mainTimeout);
 		}
-	};
-	const removeActive = () => {
-		allDesktopLinks.forEach((link) => link.classList.remove("active"));
 	};
 	allDesktopLinks.forEach((link) =>
 		link.addEventListener("click", (e) => {
