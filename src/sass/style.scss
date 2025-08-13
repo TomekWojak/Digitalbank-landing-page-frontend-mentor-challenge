@@ -47,6 +47,7 @@ body {
 	flex-direction: column;
 	min-height: 100dvh;
 	font-family: "Public Sans", sans-serif;
+	background-color: var(--very-light-gray);
 }
 .wrapper {
 	width: min(100%, 1300px);
@@ -91,6 +92,7 @@ body {
 		top: var(--move-y);
 	}
 	&__img {
+		z-index: 15;
 		padding: 0 var(--main-padding-inline);
 	}
 	&__info {
@@ -115,7 +117,9 @@ body {
 }
 
 .about {
+	position: relative;
 	background-color: var(--light-gray);
+	z-index: 10;
 	&__content {
 		position: relative;
 		padding: var(--section-padding) var(--main-padding-inline);
@@ -387,14 +391,6 @@ body {
 		--main-padding-inline: 5em;
 	}
 	.header {
-		&-desktop-bg {
-			position: relative;
-			background-image: url("/images/bg-intro-desktop.svg");
-			background-repeat: no-repeat;
-			background-size: cover;
-			background-position-x: calc(400px + 5vw);
-			background-position-y: calc(-200px - 3vw);
-		}
 		&__content {
 			display: flex;
 			align-items: center;
@@ -406,14 +402,27 @@ body {
 			width: 50%;
 			order: 1;
 			top: 0;
-			background: none;
 			overflow-x: hidden;
-			isolation: isolate;
+			background: none;
+
+			&::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 100%;
+				height: 100%;
+				background-image: url("/images/bg-intro-desktop.svg");
+				background-position-x: -50px;
+				background-position-y: -180px;
+				z-index: 0;
+				background-repeat: no-repeat;
+			}
 		}
 		&__img {
 			padding: 0;
-			top: -12em;
-			width: 130%;
+			top: -5em;
+			width: 115%;
 			position: relative;
 			img {
 				max-width: 900px;
@@ -444,7 +453,14 @@ body {
 @media (1100px <= width) {
 	.header {
 		&__img {
-			top: -15em;
+			top: -6em;
+			right: -3em;
+		}
+		&__img-container {
+			&::before {
+				background-position-x: -70px;
+				background-position-y: -180px;
+			}
 		}
 	}
 	.about {
@@ -482,11 +498,11 @@ body {
 		&__title {
 			font-size: 5.1rem;
 		}
-		&-desktop-bg {
-			background-position-x: calc(600px + 10vw);
-		}
 		&__content {
 			padding: 15em 0;
+		}
+		&__img {
+			top: -7.5em;
 		}
 	}
 	.about {
@@ -509,7 +525,8 @@ body {
 			padding: 0 var(--main-padding-inline);
 		}
 		&__img {
-			top: -21em;
+			top: -12em;
+			right: -4em;
 		}
 	}
 }
